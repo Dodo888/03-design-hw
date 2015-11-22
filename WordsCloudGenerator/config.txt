@@ -1,0 +1,8 @@
+300 600
+Comic Sans MS
+20 40
+#FF0000 #00FF00 #0000FF #FFFF00 #00FFFF #FF00FF
+png
+simple
+dictionary
+20 words
