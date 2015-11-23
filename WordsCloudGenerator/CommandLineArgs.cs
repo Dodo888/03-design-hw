@@ -13,7 +13,7 @@
         {
             get
             {
-                if (args.Length == 0) return null;
+                if (args.Length == 0) return "Default/text.txt";
                 return args[0];
             }
         }
@@ -22,7 +22,7 @@
         {
             get
             {
-                if (args.Length < 2) return null;
+                if (args.Length < 2) return "Default/banned.txt";
                 return args[1];
             }
         }
@@ -31,7 +31,7 @@
         {
             get
             {
-                if (args.Length < 3) return null;
+                if (args.Length < 3) return "Default/config.txt";
                 return args[2];
             }
         }
@@ -40,7 +40,7 @@
         {
             get
             {
-                if (args.Length < 4) return null;
+                if (args.Length < 4) return "image";
                 return args[3];
             }
         }
