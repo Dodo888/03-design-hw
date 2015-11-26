@@ -13,6 +13,7 @@ namespace WordsCloudGenerator.FileParsers
                 string line;
                 while ((line = file.ReadLine()) != null)
                 {
+                    line = line.ToLower();
                     if (wordsDictionary.ContainsKey(line))
                     {
                         wordsDictionary[line]++;

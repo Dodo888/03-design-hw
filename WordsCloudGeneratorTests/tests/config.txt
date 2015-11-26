@@ -1,0 +1,9 @@
+500 500
+Rockwell
+20 50
+#CCCCCC
+#FF0000 #00FF00 #0000FF #FFFF00 #00FFFF #FF00FF
+png
+random
+dictionary
+20 words

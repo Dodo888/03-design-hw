@@ -6,7 +6,7 @@ using WordsCloudGenerator.FileParsers;
 
 namespace WordsCloudGenerator
 {
-    internal class Program
+    public class Program
     {
         public static Dictionary<string, IFileParser> Types = new Dictionary<string, IFileParser>
         {
@@ -26,7 +26,7 @@ namespace WordsCloudGenerator
             Application = application;
         }
 
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var configFile = args[2];
             var kernel = new Ninject.StandardKernel();
@@ -41,13 +41,18 @@ namespace WordsCloudGenerator
         {
             var wordsDictionary = FileParser.GetWordsDictionaryFromFile(Arguments.TextFile);
             var bannedWordsDictionary = FileParser.GetWordsDictionaryFromFile(Arguments.BannedWordsFile);
-            var topWords = wordsDictionary
-                .Where(item => !bannedWordsDictionary.Keys.Contains(item.Key))
+            var topWords = GetTopWords(wordsDictionary, bannedWordsDictionary);
+            Application.CreateImage(Arguments.ResultFile, topWords);
+        }
+
+        public List<string> GetTopWords(Dictionary<string, int> words, Dictionary<string, int> bannedWords)
+        {
+            return words
+                .Where(item => !bannedWords.Keys.Contains(item.Key))
                 .OrderByDescending(item => item.Value)
                 .Take(Configuration.WordsAmount)
                 .Select(item => item.Key)
                 .ToList();
-            Application.CreateImage(Arguments.ResultFile, topWords);
         }
     }
 }

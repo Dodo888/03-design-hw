@@ -16,6 +16,11 @@ namespace WordsCloudGenerator
         public string Algorithm;
         public string TextType;
         public int WordsAmount;
+        public string BackgroundColor;
+
+        public Configuration()
+        {
+        }
 
         public Configuration(string configFile)
         {
@@ -27,11 +32,12 @@ namespace WordsCloudGenerator
             var fontSizes = configs[2].Split();
             MinFontSize = int.Parse(fontSizes[0]);
             MaxFontSize = int.Parse(fontSizes[1]);
-            Colors = configs[3].Split().ToList();
-            ImageFormat = configs[4];
-            Algorithm = configs[5];
-            TextType = configs[6];
-            WordsAmount = int.Parse(configs[7].Split()[0]);
+            BackgroundColor = configs[3];
+            Colors = configs[4].Split().ToList();
+            ImageFormat = configs[5];
+            Algorithm = configs[6];
+            TextType = configs[7];
+            WordsAmount = int.Parse(configs[8].Split()[0]);
         }
     }
 }
