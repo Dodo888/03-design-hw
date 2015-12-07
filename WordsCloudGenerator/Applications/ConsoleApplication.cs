@@ -5,7 +5,7 @@ using WordsCloudGenerator.CloudDrawers;
 
 namespace WordsCloudGenerator.Applications
 {
-    public class ConsoleApplication : IApplication
+    public class ConsoleApplication : IApplicationType
     {
         private readonly Configuration Config;
         public Dictionary<string, ImageFormat> Formats = new Dictionary<string, ImageFormat>

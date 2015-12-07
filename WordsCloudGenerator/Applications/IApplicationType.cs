@@ -2,7 +2,7 @@
 
 namespace WordsCloudGenerator.Applications
 {
-    public interface IApplication
+    public interface IApplicationType
     {
          void CreateImage(string imagePath, List<string> words);
     }

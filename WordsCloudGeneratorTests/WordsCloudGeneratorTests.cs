@@ -19,7 +19,7 @@ namespace WordsCloudGeneratorTests
             var config = A.Fake<Configuration>();
             config.WordsAmount = amount;
             var fileParser = A.Fake<IFileParser>();
-            var application = A.Fake<IApplication>();
+            var application = A.Fake<IApplicationType>();
             var program = new Program(args, config, fileParser, application);
             return program.GetTopWords(words, banned);
         }

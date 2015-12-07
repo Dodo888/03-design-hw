@@ -10,26 +10,26 @@ namespace WordsCloudGenerator.CloudDrawers
         {
             using (var graphics = Graphics.FromImage(bitmap))
             {
-                float height = 0;
-                float width = 0;
-                float maxWidth = 0;
+                float offsetY = 0;
+                float offsetX = 0;
+                float maxOffsetForNextColumn = 0;
                 graphics.Clear(ColorTranslator.FromHtml(config.BackgroundColor));
                 for (var i = 0; i < words.Count; i++)
                 {
                     var font = new Font(config.Font, Math.Max(config.MaxFontSize - 2*i, config.MinFontSize));
                     SizeF textSize = graphics.MeasureString(words[i], font);
-                    if (height + textSize.Height > bitmap.Height)
+                    if (offsetY + textSize.Height > bitmap.Height)
                     {
-                        width = maxWidth;
-                        maxWidth = 0;
-                        height = 0;
-                        if (width > bitmap.Width)
+                        offsetX = maxOffsetForNextColumn;
+                        maxOffsetForNextColumn = 0;
+                        offsetY = 0;
+                        if (offsetX > bitmap.Width)
                             break;
                     }
                     graphics.DrawString(words[i], font, new SolidBrush(ColorTranslator.FromHtml(config.Colors[i % config.Colors.Count])),
-                        new PointF(width, height));
-                    height += textSize.Height;
-                    maxWidth = Math.Max(maxWidth, textSize.Width);
+                        new PointF(offsetX, offsetY));
+                    offsetY += textSize.Height;
+                    maxOffsetForNextColumn = Math.Max(maxOffsetForNextColumn, textSize.Width);
                 }
             }
             return bitmap;

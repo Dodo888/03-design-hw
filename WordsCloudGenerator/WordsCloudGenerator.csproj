@@ -52,7 +52,7 @@
   <ItemGroup>
     <Compile Include="CommandLineArgs.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Applications\IApplication.cs" />
+    <Compile Include="Applications\IApplicationType.cs" />
     <Compile Include="FileParsers\SimpleFileParser.cs" />
     <Compile Include="CloudDrawers\ICloudDrawer.cs" />
     <Compile Include="FileParsers\IFileParser.cs" />

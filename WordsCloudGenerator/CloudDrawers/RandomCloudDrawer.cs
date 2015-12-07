@@ -36,24 +36,24 @@ namespace WordsCloudGenerator.CloudDrawers
         {
             var random = new Random();
             var hasStartPoint = false;
-            var width = 0;
-            var height = 0;
+            var offsetX = 0;
+            var offsetY = 0;
             var triesAmount = 0;
-            while (!hasStartPoint || HasIntersection(occupiedAreas, width, height, textSize))
+            while (!hasStartPoint || HasIntersection(occupiedAreas, offsetX, offsetY, textSize))
             {
                 if (triesAmount > MaxTriesAmount)
                     break;
-                width = random.Next(bitmap.X - (int)textSize.Width);
-                height = random.Next(bitmap.Y - (int)textSize.Height);
+                offsetX = random.Next(bitmap.X - (int)textSize.Width);
+                offsetY = random.Next(bitmap.Y - (int)textSize.Height);
                 triesAmount++;
                 hasStartPoint = true;
             }
-            return new Point(width, height);
+            return new Point(offsetX, offsetY);
         }
 
-        public bool HasIntersection(HashSet<RectangleF> occupiedAreas, int width, int height, SizeF textSize)
+        public bool HasIntersection(HashSet<RectangleF> occupiedAreas, int offsetX, int offsetY, SizeF textSize)
         {
-            var anotherArea = new RectangleF(new PointF(width, height), textSize);
+            var anotherArea = new RectangleF(new PointF(offsetX, offsetY), textSize);
             return occupiedAreas.Any(area => area.IntersectsWith(anotherArea));
         }
     }
