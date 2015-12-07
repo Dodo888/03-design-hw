@@ -8,28 +8,35 @@ namespace WordsCloudGenerator.CloudDrawers
     public class RandomCloudDrawer : ICloudDrawer
     {
         private const int MaxTriesAmount = 100;
+        private readonly Random Random = new Random();
 
         public Bitmap FormCloud(Bitmap bitmap, Configuration config, List<string> words)
         {
             using (var graphics = Graphics.FromImage(bitmap))
             {
-                var random = new Random();
                 var fontSizeDecrease = 0;
                 var occupiedAreas = new HashSet<RectangleF>();
                 graphics.Clear(ColorTranslator.FromHtml(config.BackgroundColor));
                 foreach (var word in words)
                 {
-                    var font = new Font(config.Font, Math.Max(config.MaxFontSize - 3*fontSizeDecrease, config.MinFontSize));
-                    SizeF textSize = graphics.MeasureString(word, font);
-                    Point textPlace = DefineArea(occupiedAreas, textSize, new Point(config.Width, config.Height));
-                    graphics.DrawString(word, font,
-                        new SolidBrush(ColorTranslator.FromHtml(config.Colors[random.Next(config.Colors.Count)])),
-                        textPlace);
-                    occupiedAreas.Add(new RectangleF(textPlace, textSize));
+                    occupiedAreas = DrawWord(graphics, config, word, fontSizeDecrease, occupiedAreas);
                     fontSizeDecrease++;
                 }
             }
             return bitmap;
+        }
+
+        private HashSet<RectangleF> DrawWord(Graphics graphics, Configuration config,
+            string word, int fontSizeDecrease, HashSet<RectangleF> occupiedAreas)
+        {
+            var font = new Font(config.Font, Math.Max(config.MaxFontSize - 3*fontSizeDecrease, config.MinFontSize));
+            SizeF textSize = graphics.MeasureString(word, font);
+            Point textPlace = DefineArea(occupiedAreas, textSize, new Point(config.Width, config.Height));
+            graphics.DrawString(word, font,
+                new SolidBrush(ColorTranslator.FromHtml(config.Colors[Random.Next(config.Colors.Count)])),
+                textPlace);
+            occupiedAreas.Add(new RectangleF(textPlace, textSize));
+            return occupiedAreas;
         }
 
         public Point DefineArea(HashSet<RectangleF> occupiedAreas, SizeF textSize, Point bitmap)

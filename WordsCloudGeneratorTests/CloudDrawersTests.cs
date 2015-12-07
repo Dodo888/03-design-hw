@@ -6,7 +6,7 @@ using WordsCloudGenerator.CloudDrawers;
 namespace WordsCloudGeneratorTests
 {
     [TestClass]
-    public class CloudDrawerTests
+    public class CloudDrawersTests
     {
         [TestMethod]
         public void Should_SelectAvailablePoint_NotAtTheStart()

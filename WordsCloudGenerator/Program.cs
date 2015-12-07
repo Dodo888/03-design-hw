@@ -1,4 +1,5 @@
-﻿using Ninject;
+﻿using System;
+using Ninject;
 using System.Collections.Generic;
 using System.Linq;
 using WordsCloudGenerator.Applications;
@@ -30,11 +31,21 @@ namespace WordsCloudGenerator
         {
             var configFile = args.Length >= 2 ? args[2] : "Default/config.txt";
             var kernel = new Ninject.StandardKernel();
-            kernel.Bind<CommandLineArgs>().ToConstant(new CommandLineArgs(args));
-            kernel.Bind<Configuration>().ToConstant(new Configuration(configFile));
-            kernel.Bind<IFileParser>().To<SimpleFileParser>();
-            kernel.Bind<IApplicationType>().To<ConsoleApplication>();
-            kernel.Get<Program>().Run(kernel);
+            try
+            {
+                kernel.Bind<CommandLineArgs>().ToConstant(new CommandLineArgs(args));
+                kernel.Bind<Configuration>().ToConstant(new Configuration(configFile));
+                kernel.Bind<IFileParser>().To<SimpleFileParser>();
+                kernel.Bind<IApplicationType>().To<ConsoleApplication>();
+                kernel.Get<Program>().Run(kernel);
+                Console.WriteLine("Image created! Press any key to close");
+                Console.ReadKey();
+            }
+            catch
+            {
+                Console.WriteLine("Config file has wrong format. Please look readme.txt for help");
+                Console.ReadKey();
+            }
         }
 
         public void Run(StandardKernel kernel)
