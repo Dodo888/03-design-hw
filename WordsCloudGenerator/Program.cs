@@ -1,9 +1,6 @@
-﻿using System;
-using Ninject;
+﻿using Ninject;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.Hosting;
 using WordsCloudGenerator.Applications;
 using WordsCloudGenerator.FileParsers;
 

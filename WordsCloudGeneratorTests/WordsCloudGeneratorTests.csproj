@@ -55,8 +55,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="WordsCloudGeneratorTests.cs" />
+    <Compile Include="ImageCreatingTests.cs" />
+    <Compile Include="TopWordsSelectingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CloudDrawersTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordsCloudGenerator\WordsCloudGenerator.csproj">
